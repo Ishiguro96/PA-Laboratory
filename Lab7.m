@@ -44,12 +44,21 @@ figure;
 sim('Lab7_pkt1.slx', 200);
 e = 1 - y_1;
 plot(tout, y_1, tout, u_1, tout, e);
+legend({'y(t)', 'u(t)', 'e(t)'}, 'FontSize', 16);
+title('Uklad Otwarty', 'FontSize', 20);
+xlabel('Czas [s]', 'FontSize', 16);
+ylabel('Odpowiedz(t)', 'FontSize', 16);
+
 
 % PUNKT 2 %
 figure;
 Kr = (1 / K) * (Gm / (1 - Gm));
 sim('Lab7_pkt2.slx', 250);
 plot(tout, y_2, tout, u_2, tout, e_2);
+legend({'y(t)', 'u(t)', 'e(t)'}, 'FontSize', 16);
+title('Uklad Zamkniety', 'FontSize', 20);
+xlabel('Czas [s]', 'FontSize', 16);
+ylabel('Odpowiedz(t)', 'FontSize', 16);
 
 % PUNKT 3 %
 figure;
@@ -74,3 +83,7 @@ K0 = ((Kff) + (Gm * Kr3)) * K;
 
 sim('Lab7_pkt3.slx', 250);
 plot(tout, y_3, tout, u_3, tout, e_3);
+legend({'y(t)', 'u(t)', 'e(t)'}, 'FontSize', 16);
+title('Uklad Zamknieto-Otwarty', 'FontSize', 20);
+xlabel('Czas [s]', 'FontSize', 16);
+ylabel('Odpowiedz(t)', 'FontSize', 16);
