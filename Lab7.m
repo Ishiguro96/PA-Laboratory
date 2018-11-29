@@ -75,15 +75,32 @@ beta = 0.2;
 
 % SPOSOB A
 Kr3 = kr * ((s*T1 + 1) * (s*T2 + 1) * (s*T3 + 1)) / ((beta*s + 1)^3);
+
+K0 = ((Kff) + (Gm * Kr3)) * K;
+[DAA, DFA, ~, ~] = margin(K0);
+
+sim('Lab7_pkt3.slx', 250);
+tout_A = tout;
+y_A = y_3;
+u_A = u_3;
+e_A = e_3;
+
 % SPOSOB B
+kr = 0.02;
 Kr3 = kr * ((s*T1 + 1) * (s*T2 + 1) * (s*T3 + 1)) / (s*((beta*s + 1)^2));
 
 K0 = ((Kff) + (Gm * Kr3)) * K;
-[DA, DF, ~, ~] = margin(K0);
+[DAB, DFB, ~, ~] = margin(K0);
 
 sim('Lab7_pkt3.slx', 250);
-plot(tout, y_3, tout, u_3, tout, e_3);
-legend({'y(t)', 'u(t)', 'e(t)'}, 'FontSize', 16);
+tout_B = tout;
+y_B = y_3;
+u_B = u_3;
+e_B = e_3;
+
+
+plot(tout_A, y_A, tout_A, u_A, tout_A, e_A, tout_B, y_B, tout_B, u_B, tout_B, e_B);
+legend({'yA(t)', 'uA(t)', 'eA(t)', 'yB(t)', 'uB(t)', 'eB(t)'}, 'FontSize', 16);
 title('Uklad Zamknieto-Otwarty', 'FontSize', 20);
 xlabel('Czas [s]', 'FontSize', 16);
 ylabel('Odpowiedz(t)', 'FontSize', 16);
