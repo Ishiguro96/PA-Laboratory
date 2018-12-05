@@ -28,9 +28,9 @@ stepinfo(K)
 % EDIT HERE %
 t0 = 71.2;
 
-mi = 5; % Czym wieksze, tym wolniejszy uklad
-omega = 0.54; % Czym mniejsze, tym wolniejszy uklad
-ksi = 2; % Jesli osc., to ksi < 1, jesli aper. to ksi > 1
+mi = 9; % Czym wieksze, tym wolniejszy uklad
+omega = 3.5; % Czym mniejsze, tym wolniejszy uklad
+ksi = 1; % Jesli osc., to ksi < 1, jesli aper. to ksi > 1
 % END EDIT %
 
 Gm = (1 / (1 + mi*s)) * ((omega^2) / (s^2 + 2*ksi*omega*s + omega^2));
@@ -39,6 +39,7 @@ Kff = Gm / K;
 stepinfo(Gm)
 step(Gm);
 
+%{
 % PUNKT 1 %
 figure;
 sim('Lab7_pkt1.slx', 200);
@@ -49,7 +50,23 @@ title('Uklad Otwarty', 'FontSize', 20);
 xlabel('Czas [s]', 'FontSize', 16);
 ylabel('Odpowiedz(t)', 'FontSize', 16);
 
+omega = 0.5;
+Gm = (1 / (1 + mi*s)) * ((omega^2) / (s^2 + 2*ksi*omega*s + omega^2));
+Kff = Gm / K;
 
+% PUNKT 1 %
+figure;
+sim('Lab7_pkt1.slx', 200);
+e = 1 - y_1;
+plot(tout, y_1, tout, u_1, tout, e);
+legend({'y(t)', 'u(t)', 'e(t)'}, 'FontSize', 16);
+title('Uklad Otwarty - omega = 0.5', 'FontSize', 20);
+xlabel('Czas [s]', 'FontSize', 16);
+ylabel('Odpowiedz(t)', 'FontSize', 16);
+
+%}
+
+%{
 % PUNKT 2 %
 figure;
 Kr = (1 / K) * (Gm / (1 - Gm));
@@ -60,8 +77,28 @@ title('Uklad Zamkniety', 'FontSize', 20);
 xlabel('Czas [s]', 'FontSize', 16);
 ylabel('Odpowiedz(t)', 'FontSize', 16);
 
+
+
+omega = 8;
+Gm = (1 / (1 + mi*s)) * ((omega^2) / (s^2 + 2*ksi*omega*s + omega^2));
+
+% PUNKT 2 %
+figure;
+Kr = (1 / K) * (Gm / (1 - Gm));
+sim('Lab7_pkt2.slx', 250);
+plot(tout, y_2, tout, u_2, tout, e_2);
+legend({'y(t)', 'u(t)', 'e(t)'}, 'FontSize', 16);
+title('Uklad Zamkniety - omega = 8', 'FontSize', 20);
+xlabel('Czas [s]', 'FontSize', 16);
+ylabel('Odpowiedz(t)', 'FontSize', 16);
+%}
+
+ksi = 0.3;
+
 % PUNKT 3 %
 figure;
+Gm = (1 / (1 + mi*s)) * ((omega^2) / (s^2 + 2*ksi*omega*s + omega^2));
+Kff = Gm / K;
 
 %{
     Zmieniamy BETE w zaleznosci od podanych danych na labkach. Zmieniamy
@@ -69,8 +106,8 @@ figure;
 %}
 
 % EDIT HERE %
-kr = 0.02;
-beta = 0.2;
+kr = 0.448;
+beta = Tmax/20;
 % END EDIT %
 
 % SPOSOB A
@@ -86,7 +123,7 @@ u_A = u_3;
 e_A = e_3;
 
 % SPOSOB B
-kr = 0.02;
+kr = 0.0803;
 Kr3 = kr * ((s*T1 + 1) * (s*T2 + 1) * (s*T3 + 1)) / (s*((beta*s + 1)^2));
 
 K0 = ((Kff) + (Gm * Kr3)) * K;
@@ -101,6 +138,6 @@ e_B = e_3;
 
 plot(tout_A, y_A, tout_A, u_A, tout_A, e_A, tout_B, y_B, tout_B, u_B, tout_B, e_B);
 legend({'yA(t)', 'uA(t)', 'eA(t)', 'yB(t)', 'uB(t)', 'eB(t)'}, 'FontSize', 16);
-title('Uklad Zamknieto-Otwarty', 'FontSize', 20);
+title('Uklad Zamknieto-Otwarty ksi = 0.5', 'FontSize', 20);
 xlabel('Czas [s]', 'FontSize', 16);
 ylabel('Odpowiedz(t)', 'FontSize', 16);

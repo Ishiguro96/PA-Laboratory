@@ -193,7 +193,12 @@ T0 = t1 - T;
     % kr = 1.4*T/(k*T0);
     % Ti = 1.3*T0;
     % Td = 0.5*T0;
+    
+
+    
 sim('Zlinearyzowany.slx');
+figure
+plot(tout,sterowanie);
 figure
 plot(tout, nlin, tout, zlin);
 figure;
