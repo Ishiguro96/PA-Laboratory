@@ -6,6 +6,8 @@
 % - AUTOR: DAWID TOBOR  - %
 % ----------------------- %
 
+% Jest problem dla ludzi z wersja matlaba < 2015b, bo nie ma tam wtedy funkcji string(). Rozwiazanie to po prostu zakomentowanie wszystkiego, co zwiazane z legenda w zadaniu 1.
+
 %% Zadanie 1 - Badanie wplywu parametrow regulatora krokowego
 
 clear variables;
