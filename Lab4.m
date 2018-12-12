@@ -153,23 +153,21 @@ T0 = t1 - T;
     % kr = 0.3*T/(k*T0);
     
     % Regulator PI
-    % kr = 0.6*T/(k*T0);
-    % Ti = 0.8*T0 + 0.5*T;
+     kr = 0.6*T/(k*T0);
+     Ti = 0.8*T0 + 0.5*T;
     
     % Regulator PID
-    kr = 0.95*T/(k*T0)
-    Ti = 2.4*T0
-    Td = 0.42*T0
-    Tf = 0.05 * Td %Stała czasowa inercji
-    Kr = kr * (1 + 1/(Ti*s) + (Td*s)/(Tf*s+1));%Transmitancja regulatora
+    % kr = 0.95*T/(k*T0)
+    % Ti = 2.4*T0
+    % Td = 0.42*T0
+    % Tf = 0.05 * Td %Stała czasowa inercji
     
-    K0 = K * Kr;
-    GPID2 = K0/(1+K0); %Transmitancja układu zamkniętego (w --> y)
-    [DAPID2, DFPID2, DA_omegaPID2, DF_omegaPID2] = margin(K0);
-    
-    figure;
-    step(GPID, GPID2, 0:0.01:400);
-    stepinfo(minreal(GPID2))
+%     GPID2 = K0/(1+K0); %Transmitancja układu zamkniętego (w --> y)
+%     [DAPID2, DFPID2, DA_omegaPID2, DF_omegaPID2] = margin(K0);
+%     
+%     figure;
+%     step(GPID2, 0:0.01:400);
+%     stepinfo(minreal(GPID2))
     
 % Kryterium Chiena, Hronesa i Reswicka (20% przeregulowania)
     % Regulator P
@@ -194,7 +192,13 @@ T0 = t1 - T;
     % Ti = 1.3*T0;
     % Td = 0.5*T0;
     
+Kr = kr * (1 + 1/(Ti*s));%Transmitancja regulatora
 
+K0 = K * Kr;
+
+GPI = K0/(1+K0);
+figure;
+step(GPI);
     
 sim('Zlinearyzowany.slx');
 figure
