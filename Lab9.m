@@ -6,6 +6,8 @@
 % - AUTOR: DAWID TOBOR  - %
 % ----------------------- %
 
+% Jest problem dla ludzi z wersja matlaba < 2015b, bo nie ma tam wtedy funkcji string(). Rozwiazanie to po prostu zakomentowanie wszystkiego, co zwiazane z legenda w zadaniu 1.
+
 %% Zadanie 1 - Badanie wplywu parametrow regulatora krokowego
 
 clear variables;
@@ -244,6 +246,7 @@ hold on;
 plot(y);
 plot(y_pi);
 hold off
+<<<<<<< HEAD
 legend({'Regulator trójpołożeniowy', 'Regulator PI'}, 'FontSize', 18);
 title('Odpowiedz', 'FontSize', 20);
 xlabel('Czas [s]', 'FontSize', 16);
@@ -251,3 +254,5 @@ xlim([0, CZAS_KONCA_SYMULACJI]);
 ylabel('y(t)', 'FontSize', 16);
 
 end
+=======
+>>>>>>> 1d03e6e21bbc2173caa9da60a7b49bc559a2eccb
