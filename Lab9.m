@@ -141,13 +141,13 @@ run('ModelData.m');
 s = tf('s');
 K = k/((1+s*T1)*(1+s*T2)*(1+s*T3));
 
-CZAS_KONCA_SYMULACJI = 250;
+CZAS_KONCA_SYMULACJI = 200;
 
 % Parametry regulatora krokowego
     a = 0.01;
     delta = 0.005;
     B = 0.4;
-    ks = 10;
+    ks = 20;
 
 % Regulator PI z cwiczen 4
     kr = 0.0679;
@@ -167,12 +167,20 @@ hold on;
 plot(u);
 plot(u_pi);
 hold off;
+legend({'Regulator trojpolozeniowy', 'Regulator PI'}, 'FontSize', 18);
+title('Sterowanie', 'FontSize', 20);
+xlabel('Czas [s]', 'FontSize', 16);
+ylabel('u(t)', 'FontSize', 16);
 
 figure;
 hold on;
 plot(y);
 plot(y_pi);
-hold off
+hold off;
+legend({'Regulator trójpołożeniowy', 'Regulator PI'}, 'FontSize', 18);
+title('Odpowiedz', 'FontSize', 20);
+xlabel('Czas [s]', 'FontSize', 16);
+ylabel('y(t)', 'FontSize', 16);
 
 %% Zadanie 3 - badanie wplywu szybkosci zmian na jakosc sledzenia
 
@@ -185,13 +193,27 @@ run('ModelData.m');
 s = tf('s');
 K = k/((1+s*T1)*(1+s*T2)*(1+s*T3));
 
-CZAS_KONCA_SYMULACJI = 100;
+for i=1:3
+
+switch(i)
+    case 1
+        WE = 1;
+        CZAS_KONCA_SYMULACJI = 220;
+    case 2
+        WE = 1/s;
+        CZAS_KONCA_SYMULACJI = 150;
+    case 3
+        WE = 2/(s^2);
+        CZAS_KONCA_SYMULACJI = 150;
+end
+
+
 
 % Parametry regulatora krokowego
     a = 0.01;
     delta = 0.005;
     B = 0.4;
-    ks = 10;
+    ks = 20;
 
 % Regulator PI z cwiczen 4
     kr = 0.0679;
@@ -211,9 +233,21 @@ hold on;
 plot(u);
 plot(u_pi);
 hold off;
+legend({'Regulator trojpolozeniowy', 'Regulator PI'}, 'FontSize', 18);
+title('Sterowanie', 'FontSize', 20);
+xlabel('Czas [s]', 'FontSize', 16);
+xlim([0, CZAS_KONCA_SYMULACJI]);
+ylabel('u(t)', 'FontSize', 16);
 
 figure;
 hold on;
 plot(y);
 plot(y_pi);
 hold off
+legend({'Regulator trójpołożeniowy', 'Regulator PI'}, 'FontSize', 18);
+title('Odpowiedz', 'FontSize', 20);
+xlabel('Czas [s]', 'FontSize', 16);
+xlim([0, CZAS_KONCA_SYMULACJI]);
+ylabel('y(t)', 'FontSize', 16);
+
+end
